@@ -12,7 +12,7 @@ from flask import Flask, session, render_template, request, g, jsonify
 
 
 # Create the Flask app
-app = Flask(__name__, template_folder='template')
+app = Flask(__name__)
 
 # Register our controller and blueprint router
 app.register_blueprint(api)
