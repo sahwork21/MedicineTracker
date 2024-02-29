@@ -19,5 +19,5 @@ def find_user_by_name(uname):
   cursor.execute("SELECT * FROM user WHERE username = ?", (uname,))
 
   # And return the tuples
-  data = cursor.fetchall()
+  data = cursor.fetchall()[0]
   return data

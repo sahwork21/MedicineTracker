@@ -1,10 +1,28 @@
 <!DOCTYPE HTML>
 
 <!--Page to display a user's information-->
-<html>
+<html ng-app="myApp">
   <head>
+    <!--The javascript has to go in these tags--->
+    {%block javascript%}
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular.min.js"></script>
+    <script src="{{ url_for('static', filename='user.js')}}"></script>
+    
+      
+    <script>console.log("f")</script>
+      
+    
+    {%endblock%}
   </head>
 
-  <body>
+  <body ng-controller="UserController">
+    
+
+    
+
+    <p>This is just the user page for {{d}}</p>
   </body>
+
+
 </html>
+

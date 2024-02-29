@@ -15,10 +15,11 @@ def index():
   return render_template("index.html")
 
 # Get the user page
-@routes.route("/user/<name>")
+@routes.route("/home/<name>")
 def user(name):
-  info = api.get_user(name)
+  
 
-  return info
+  # Return the jsonified data and the page
+  return render_template("user.html")
 
 
