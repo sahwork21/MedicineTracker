@@ -18,9 +18,11 @@
   <body ng-controller="UserController">
     
 
-    
+    <!--Flask and jinja are often uncooperative with JS variables.-->
 
-    <p>This is just the user page for {{d}}</p>
+    
+    <p>This is just the user page for {{'{{user.username}}'}}</p>
+    
   </body>
 
 
