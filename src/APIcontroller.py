@@ -3,7 +3,7 @@ This is the API controller for the application
 It deals with CRUD operations related to users and their medicines
 '''
 import sqlite3
-from flask import Blueprint, jsonify
+from flask import Blueprint, jsonify, request
 
 # Import the repo class to query
 import repositories as repo
@@ -31,3 +31,18 @@ def get_user(name):
 
   
   return jsonify(json_data), 200
+
+# API call to make a new user
+# We have to use the request.json function to get the json in the request
+@api.route('/user/<name>', methods=['POST'])
+def make_user(name):
+  # Get the JSON data in the request we sent
+  # We may not get a json so fail if needed
+  data = request.get_json(silent=True)
+
+  print(data)
+  # This should be a user. We need to pull out the relevant info, SQL query for duplicates, and respond.
+
+  # 
+  return "Account Created", 200
+
