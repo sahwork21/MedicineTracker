@@ -40,9 +40,23 @@ def make_user(name):
   # We may not get a json so fail if needed
   data = request.get_json(silent=True)
 
-  print(data)
-  # This should be a user. We need to pull out the relevant info, SQL query for duplicates, and respond.
+  #print(data)
+  # Before querying we may want to check the username is alphanumeric and escaped
 
-  # 
-  return "Account Created", 200
+
+  # This should be a user. We need to pull out the relevant info, SQL query for duplicates, and respond.
+  # Query our table
+  connection = sqlite3.connect("test.db")
+  cursor = connection.cursor()
+  search = cursor.execute("SELECT username FROM user WHERE username = ?", (data.username,)).fetchall()
+
+  # If the search comes up empty then we can insert this new user
+  if len(search) == 0:
+    # insert data with the help of our JSON object
+    cursor.execute("INSERT INTO user (username, age, gender, weight, hpc) VALUES (?, ?, ?, ?, ?)", (data.username, data.age, data.gender, data.weight, data.hpc))
+    return "Account Created.", 200
+
+
+  # The account could not be created so we need to return a 409 conflict
+  return "Account Not Created. Username in use.", 409
 

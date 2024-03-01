@@ -39,6 +39,10 @@ data = cursor.execute("SELECT * FROM meds").fetchall()
 print(data)
 # Commit changes and close our connection
 
+# Run a check of select
+data = cursor.execute("SELECT username FROM user WHERE username = ?", ("Alice",)).fetchall()
+print(data)
+print(len(data))
 
 connection.commit()
 cursor.close()
