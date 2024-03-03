@@ -18,6 +18,8 @@ def get_user(name):
   # Normally these type of queries are in another class, but this is still \
   data = repo.find_user_by_name(name)
 
+
+  # We should also look for their medicines, but maybe that can be another page
   # before we return the data we have to jsonify it with a dict
  
 
@@ -43,11 +45,17 @@ def make_user(name):
   #print(data)
   # Before querying we may want to check the username is alphanumeric and escaped
 
+  # Santitize quoutes ' and " to prevent any conditions
+  # Sanaitize anything that says <script> or <or>
+
+  # I would just do this since we should not put all our faith into a library for safety
 
   # This should be a user. We need to pull out the relevant info, SQL query for duplicates, and respond.
   # Query our table
   connection = sqlite3.connect("test.db")
   cursor = connection.cursor()
+
+  
   search = cursor.execute("SELECT username FROM user WHERE username = ?", (data.username,)).fetchall()
 
   # If the search comes up empty then we can insert this new user
