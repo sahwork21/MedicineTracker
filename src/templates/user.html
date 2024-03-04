@@ -5,6 +5,7 @@
   <head>
     <!--The javascript has to go in these tags--->
     {%block javascript%}
+    <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular.min.js"></script>
     <script src="{{ url_for('static', filename='user.js')}}"></script>
     
@@ -18,10 +19,14 @@
   <body ng-controller="UserController">
     
 
-    <!--Flask and jinja are often uncooperative with JS variables.-->
+    <!--Flask and jinja are often uncooperative with JS variables so we need these extra curly braces{{}}.-->
+    <h2>Welcome to your personal medicine page {{'{{user.username}}'}}</h2>
+    
+    <!--Buttons to select profile or settings-->
+    
 
     
-    <p>This is just the user page for {{'{{user.username}}'}}</p>
+
     
   </body>
 
