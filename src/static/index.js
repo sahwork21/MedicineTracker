@@ -33,8 +33,8 @@ app.controller("IndexController", function($http, $scope, $q){
     }
     else{
       //Time to get a user 
-      var name = $scope.username;
-      $http.get("/user/" + name, name).then(function(success){
+      
+      $http.get("/user/" + name).then(function(success){
         console.log("Success");
 
         //We got the user so display success and POST to get the right webpage
@@ -42,7 +42,12 @@ app.controller("IndexController", function($http, $scope, $q){
         $scope.success = true;
 
         $http.post("/home/" + name, name).then(function(response){
-          
+          // Simulate an HTTP redirect to go to the user page
+          console.log(response)
+
+          var newUrl = response.data;
+          console.log(newUrl);
+          location.href = newUrl;
         });
 
         
