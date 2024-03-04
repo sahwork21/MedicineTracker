@@ -41,14 +41,9 @@ app.controller("IndexController", function($http, $scope, $q){
         $scope.invalid = false;
         $scope.success = true;
 
-        $http.post("/home/" + name, name).then(function(response){
-          // Simulate an HTTP redirect to go to the user page
-          console.log(response)
-
-          var newUrl = response.data;
-          console.log(newUrl);
-          location.href = newUrl;
-        });
+        //Session store the user and redirect
+        sessionStorage.setItem("username", name);
+        location.href = "/home/" + name;
 
         
       }

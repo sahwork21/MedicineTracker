@@ -51,8 +51,8 @@
 				ng-disabled="loginForm.username.$invalid">Sign in</button>
 
           <!--Submission responses-->
-          <span ng-if="invalid && !loginForm.username.$touched" class="mt-10 font-semibold text-sm text-red-600">Invalid username</span>
-          <span ng-if="success && !loginForm.username.$touched" class="mt-10 font-semibold text-sm text-green-600">Logging in</span>
+          <span ng-if="invalid" class="mt-10 font-semibold text-sm text-red-600">Invalid username</span>
+          <span ng-if="success" class="mt-10 font-semibold text-sm text-green-600">Logging in</span>
         </div>
 
         
