@@ -28,24 +28,30 @@
 		</div>
   
 
-  <!--form for the entry of the username and some error messages-->
-
+  <!--form for the entry of the username and some error messages. Use raw to skip flask modifications-->
+    {% raw %}
     <form class="min-w-[25%]" name="loginForm" ng-model="loginForm" ng-submit="onSubmit()">
-      <!--Use a simple textbox for data entry-->
+      <!--Use a simple textbox for data entry. Show something if they entered an incorrect username-->
         <div>
           <p class="mt-10 font-semibold text-sm">Username</p>
           <input id="username" name="username" ng-model="formData.username" class="w-full ring-1 rounded-md p-2 mt-1 font-light hover:ring-blue-500"
           placeholder="Enter username" required>
 
+          
           <button type="submit" class="w-full p-2 mt-6 text-white rounded-lg bg-blue-500 hover:bg-blue-700" 
 				ng-disabled="form.$invalid">Sign in</button>
           
         </div>
+
+        
+
+        
       
       
       
       
   </form>
+  {% endraw %}
   
 
 
