@@ -1,18 +1,16 @@
 //This is the controller for the index page. It mostly deals with logging users in and creating new accounts
 //We will handle logging users in by sending them to the right page
-var success = false;
-var invalid = true;
+
 var app = angular.module('myApp', []);
 app.controller("IndexController", function($http, $scope, $q){
 
-
-  console.log("Inside index controller")
-  //Scope variables for displaying error messages
-  $scope.data = {
-    a:"aaa",
-    b:"bbb"
-  }
-
+  // Variables 
+  $scope.success = false;
+  $scope.invalid = false;
+  
+  
+  
+  //Scope variable to get username from the form
   $scope.formData = {
     username : ""
   };
@@ -34,8 +32,27 @@ app.controller("IndexController", function($http, $scope, $q){
       $scope.invalid = true;
     }
     else{
-      //Time to post 
-      $http.post()
+      //Time to get a user 
+      var name = $scope.username;
+      $http.get("/user/" + name, name).then(function(success){
+        console.log("Success");
+
+        //We got the user so display success and POST to get the right webpage
+        $scope.invalid = false;
+        $scope.success = true;
+
+        $http.post("/home/" + name, name).then(function(response){
+          
+        });
+
+        
+      }
+      ,function (failure){
+        console.log("Failed");
+        //The GET gave us a 404 error since the user was not found. Just return back to home with an error message
+        $scope.invalid = true;
+      });
+
     }
 
     
