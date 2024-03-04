@@ -1,12 +1,12 @@
 <!DOCTYPE HTML>
-<html>
+<html ng-app = "myApp">
 
 <head>
   <title>Home Page</title>
   {%block javascript%}
   <script src="https://cdn.tailwindcss.com"></script> <!--Styling classes for us to use-->
   <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular.min.js"></script>
-  <script src ="{{url_for('static', filename='index.js')}}"></script>
+  <script src ="{{ url_for('static', filename='index.js')}}"></script>
   {%endblock%}
   <!--Controller logic to handle username inputs-->
   
@@ -22,7 +22,7 @@
         svg {
           fill: #dc1717; 
         }
-      </style>
+      </style> <!--svg credit to Font Awesome Free 6.4.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) Copyright 2023 Fonticons, Inc. -->
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"> <g> <path fill="none" d="M0 0H24V24H0z"/> <path d="M19 2v2h-2v3c1.657 0 3 1.343 3 3v11c0 .552-.448 1-1 1H5c-.552 0-1-.448-1-1V10c0-1.657 1.343-3 3-3V4H5V2h14zm-2 7H7c-.552 0-1 .448-1 1v10h12V10c0-.552-.448-1-1-1zm-4 2v2h2v2h-2.001L13 17h-2l-.001-2H9v-2h2v-2h2zm2-7H9v3h6V4z"/> </g> </svg>
 			<h1 class="text-xl font-semibold text-stone-500 mt-3">Sign in to Medicine Manager</h1>
 		</div>
@@ -38,9 +38,17 @@
           placeholder="Enter username" required>
 
           
-          <button type="submit" class="w-full p-2 mt-6 text-white rounded-lg bg-blue-500 hover:bg-blue-700" 
-				ng-disabled="form.$invalid">Sign in</button>
+
+         
           
+          
+        </div>
+        <div>
+          <span ng-show="loginForm.username.$touched && loginForm.username.$invalid" class="mt-10 font-semibold text-sm">Please enter your username</span>
+        </div>
+        <div>
+          <button type="submit" class="w-full p-2 mt-6 text-white rounded-lg bg-blue-500 hover:bg-blue-700" 
+				ng-disabled="loginForm.username.$invalid">Sign in</button>
         </div>
 
         
@@ -50,8 +58,10 @@
       
       
       
+      
   </form>
   {% endraw %}
+  
   
 
 

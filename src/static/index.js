@@ -5,8 +5,13 @@ var invalid = true;
 var app = angular.module('myApp', []);
 app.controller("IndexController", function($http, $scope, $q){
 
+
+  console.log("Inside index controller")
   //Scope variables for displaying error messages
-  
+  $scope.data = {
+    a:"aaa",
+    b:"bbb"
+  }
 
   $scope.formData = {
     username : ""
