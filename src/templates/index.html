@@ -9,6 +9,8 @@
   <script src ="{{ url_for('static', filename='index.js')}}"></script>
   {%endblock%}
   <!--Controller logic to handle username inputs-->
+
+  <!--Style modifier to hide our button-->
   
 </head>
 
@@ -48,7 +50,7 @@
         </div>
         <div>
           <button type="submit" class="w-full p-2 mt-6 text-white rounded-lg bg-blue-500 hover:bg-blue-700" 
-				ng-disabled="loginForm.username.$invalid">Sign in</button>
+				ng-disabled="!formData.username">Sign in</button>
 
           <!--Submission responses-->
           <span ng-if="invalid" class="mt-10 font-semibold text-sm text-red-600">Invalid username</span>

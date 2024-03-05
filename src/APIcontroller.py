@@ -18,6 +18,10 @@ def get_user(name):
   # Normally these type of queries are in another class, but this is still \
   data = repo.find_user_by_name(name)
 
+  # If we got nothing return a 404 not found
+  if data is None:
+    return "User not found", 404
+
 
   # We should also look for their medicines, but maybe that can be another page
   # before we return the data we have to jsonify it with a dict
@@ -68,3 +72,5 @@ def make_user(name):
   # The account could not be created so we need to return a 409 conflict
   return "Account Not Created. Username in use.", 409
 
+# Login the user and add them to a collection of sessions.
+# We should probably do a select check of our database, but the previous API call should do that already

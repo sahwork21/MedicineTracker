@@ -28,6 +28,8 @@ app.controller("IndexController", function($http, $scope, $q){
     //Access the form's username
     var name = $scope.formData.username;
 
+    //You left the field blank so nothing is going to happen
+    //This is more of insurance since the angular button should not work
     if(name === null || name.length === 0){
       $scope.invalid = true;
     }
@@ -41,9 +43,19 @@ app.controller("IndexController", function($http, $scope, $q){
         $scope.invalid = false;
         $scope.success = true;
 
-        //Session store the user and redirect
-        sessionStorage.setItem("username", name);
-        location.href = "/home/" + name;
+        //We will run a login api call that adds this user to a session group
+        //The user must logout to get themselves removed from this collection of sessions
+        //We are just doing this to have the frontend and backend check for a user
+        $http.post("/login", name).then(function(success){
+          //We were able to add the user to session so you can proceed
+          //Session store the user and redirect
+          sessionStorage.setItem("username", name);
+          location.href = "/home/" + name;
+
+        });
+        //Something went wrong with the server likely and you should not be here.
+        console.log("Server failed us and you should have been redirected")
+        
 
         
       }
