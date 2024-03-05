@@ -84,7 +84,7 @@ def login():
   #Get the JSON data which is a username only.
   #If this is not a single string for username this is a bad requests
   name = request.get_json(silent=True)
-  if isinstance(name.username, str):
+  if isinstance(name, str):
 
     concurrent_sessions.append(name)
     return "You are now signed in", 200

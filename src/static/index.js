@@ -46,14 +46,18 @@ app.controller("IndexController", function($http, $scope, $q){
         //We will run a login api call that adds this user to a session group
         //The user must logout to get themselves removed from this collection of sessions
         //We are just doing this to have the frontend and backend check for a user
+        /*
         $http.post("/login", name).then(function(success){
           console.log(success)
           //We were able to add the user to session so you can proceed
           //Session store the user and redirect
-          sessionStorage.setItem("username", name);
-          location.href = "/home/" + name;
+          
 
         });
+        */
+
+        sessionStorage.setItem("username", name);
+        location.href = "/home/" + name;
         
         //Something went wrong with the server likely and you should not be here.
         console.log("Server failed us and you should have been redirected");
