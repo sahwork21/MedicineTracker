@@ -57,7 +57,7 @@ app.controller("IndexController", function($http, $scope, $q){
         */
 
         sessionStorage.setItem("username", name);
-        location.href = "/home/" + name;
+        location.href = "/home";
         
         //Something went wrong with the server likely and you should not be here.
         console.log("Server failed us and you should have been redirected");

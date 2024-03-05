@@ -17,8 +17,8 @@ def index():
   return render_template("index.html")
 
 # Get the user page
-@routes.route("/home/<name>", methods = ["POST", "GET"])
-def user(name):
+@routes.route("/home", methods = ["POST", "GET"])
+def user():
   return render_template("user.html")
 
 
