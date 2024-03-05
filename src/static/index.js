@@ -47,20 +47,23 @@ app.controller("IndexController", function($http, $scope, $q){
         //The user must logout to get themselves removed from this collection of sessions
         //We are just doing this to have the frontend and backend check for a user
         $http.post("/login", name).then(function(success){
+          console.log(success)
           //We were able to add the user to session so you can proceed
           //Session store the user and redirect
           sessionStorage.setItem("username", name);
           location.href = "/home/" + name;
 
         });
+        
         //Something went wrong with the server likely and you should not be here.
-        console.log("Server failed us and you should have been redirected")
+        console.log("Server failed us and you should have been redirected");
         
 
         
       }
       ,function (failure){
         console.log("Failed");
+        console.log(failure);
         //The GET gave us a 404 error since the user was not found. Just return back to home with an error message
         $scope.invalid = true;
       });
