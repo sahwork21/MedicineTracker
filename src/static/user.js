@@ -7,6 +7,7 @@ console.log("sdfa")
 //This is the controller for users. It has the scope variable and http requests
 app.controller("UserController", function($http, $scope, $q){
 
+  $scope.show = false
   
   //This scope variable will contain the user's information
   $scope.user;
@@ -29,6 +30,7 @@ app.controller("UserController", function($http, $scope, $q){
       console.log(response.data);
       $scope.user = response.data;
       console.log($scope.user);
+      $scope.show = true
       //Flask 
     })
 

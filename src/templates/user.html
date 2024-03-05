@@ -16,28 +16,35 @@
     {%endblock%}
   </head>
 
-  <body ng-controller="UserController" ng-if="">
+  <body ng-controller="UserController">
     {%raw%}
 
-    <!--Flask and jinja are often uncooperative with JS variables so we need these extra curly braces.-->
-    <h2>Welcome to your personal medicine page {{user.username}}</h2>
+    <!--Flask and jinja are often uncooperative so we need this to be a raw block.-->
+    
+
+
     
     <!--Buttons (These are really just links) to select profile or settings-->
     <!--Room to add new links-->
-    <a href="customer/order"
-					class="flex items-center gap-1 p-2 rounded-md mt-2 text-white bg-blue-500 hover:bg-blue-700">
-			<svg xmlns="http://www.w3.org/2000/svg" height="1em"
-						viewBox="0 0 448 512"><!--! Font Awesome Free 6.4.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) Copyright 2023 Fonticons, Inc. -->
-					<style>
-							svg {
-								fill: #ffffff
-							}
-						</style>
-				<path
-							d="M256 80c0-17.7-14.3-32-32-32s-32 14.3-32 32V224H48c-17.7 0-32 14.3-32 32s14.3 32 32 32H192V432c0 17.7 14.3 32 32 32s32-14.3 32-32V288H400c17.7 0 32-14.3 32-32s-14.3-32-32-32H256V80z" />
-				</svg>
-				<p class="font-semibold"> My Profile</p>
-		</a>
+    <!--These buttons came from the CSS tailwind library. Source: https://flowbite.com/docs/components/buttons/-->
+    <div class="ng-cloak max-w-7xl mx-auto min-h-screen p-3 mt-10">
+
+      <h2 class = "text-center font-semibold ">Welcome To Your Personal Medicine Page {{user.username}}</h2>
+      <div class="flex flex-wrap gap-2 my-2 sm:flex-nowrap">
+				
+        <button type="button" class="text-black hover:text-white border border-sky-500 hover:bg-sky-500 focus:ring-4 focus:outline-none focus:ring-[#3b5998]/50 font-medium rounded-lg text-sm px-5 py-2.5 text-center inline-flex items-center">
+        <svg class="w-4 h-4 me-2" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 8 19">
+        <path fill-rule="evenodd" d="M6.135 3H8V0H6.135a4.147 4.147 0 0 0-4.142 4.142V6H0v3h2v9.938h3V9h2.021l.592-3H5V3.591A.6.6 0 0 1 5.592 3h.543Z" clip-rule="evenodd"/>
+        
+        </svg>
+        
+        View Your Medical Profile
+          
+        </button>
+      </div>
+
+      
+    </div>
     {%endraw%}
 
     
