@@ -26,10 +26,10 @@ app.controller("UserController", function($http, $scope, $q){
     //Get the user data now
     $http.get("/user/" + uname).then(function(response){
       //Get info from our response
-      console.log(response);
-      console.log(response.data);
+      //console.log(response);
+      //console.log(response.data);
       $scope.user = response.data;
-      console.log($scope.user);
+      //console.log($scope.user);
       $scope.show = true
       //Flask 
     })
@@ -39,6 +39,15 @@ app.controller("UserController", function($http, $scope, $q){
 
   //Load the user now
   $scope.loadUser();
+
+  //Create the other function for logging the user out
+  //Remove this user's session info and redirect them to the home page
+  $scope.logout =function(){
+    //Remove sessionStorage info
+    sessionStorage.removeItem("username");
+
+    location.href = "/";
+  }
 
   /*
   

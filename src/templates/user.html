@@ -27,11 +27,34 @@
     <!--Buttons (These are really just links) to select profile or settings-->
     <!--Room to add new links-->
     <!--These buttons came from the CSS tailwind library. Source: https://flowbite.com/docs/components/buttons/-->
-    <div class="ng-cloak max-w-7xl mx-auto min-h-screen p-3 mt-10">
+    <div ng-cloak class="ng-cloak max-w-7xl mx-auto min-h-screen p-3 mt-10">
 
+      <!--Logout and home buttons. The logout is an actual button that needs to wrap up the user-->
+      <div class = "flex flex-wrap content-center gap-2 my-2 sm:flex-nowrap" >
+        <!--The home button is just another link. It's probably not necessary on this page if we are being honest-->
+        <!--
+        <div class="absolute left-0 top-0 h-16 w-16">
+          <p>Left</p>
+        </div>
+        -->
+
+        <!--This button will run a function and log us out. I will keep it on the home page only-->
+        <div class="absolute top-4 right-16 h-16 w-16">
+          <button ng-click="logout()" type="button" class=" text-black bg-white border fill-rose-500 border-rose-500 hover:bg-rose-500 hover:text-white focus:outline-none focus:ring-[#3b5998]/50 font-medium rounded-lg text-sm px-5 py-2.5 text-center inline-flex items-center">
+            
+            Logout
+          </button>
+        </div>
+      </div>
+
+      <!--Banner for the welcome message to the user-->
       <h2 class = "text-center font-semibold ">Welcome To Your Personal Medicine Page {{user.username}}</h2>
-      <div class="flex flex-wrap content-center gap-2 my-2 sm:flex-nowrap">
+
+
+      <!--Row so the user can select a bunch of links to new pages-->
+      <div class=" flex-wrap content-center gap-2 my-2 sm:flex-nowrap">
 				
+        
         <a href = "/" type="button" height = "1em" class=" flex w-2/12 items-center text-black hover:text-white border fill-sky-500 hover:fill-white border-sky-500 hover:bg-sky-500 focus:ring-4 focus:outline-none focus:ring-[#000000]/50 font-medium rounded-lg text-sm px-5 py-2.5 text-center inline-flex items-center">
         <svg class = "w-6 h-6 left-0" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--!Font Awesome Free 6.5.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2024 Fonticons, Inc.-->
         <path d="M224 256A128 128 0 1 0 224 0a128 128 0 1 0 0 256zm-45.7 48C79.8 304 0 383.8 0 482.3C0 498.7 13.3 512 29.7 512H418.3c16.4 0 29.7-13.3 29.7-29.7C448 383.8 368.2 304 269.7 304H178.3z"/></svg>
