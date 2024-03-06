@@ -10,6 +10,11 @@ import repositories as repo
 
 api = Blueprint('api', __name__)
 
+
+# This is a global variable to hold all the usernames that have opened up a session
+# If this were a real server after an hour has passed we would proably remove these or have TCP help us end the connection
+concurrent_sessions = []
+
 # Get the user's info from the table so we can display it
 # Query by their unique username
 @api.route('/user/<name>', methods=['GET'])
@@ -17,6 +22,10 @@ def get_user(name):
   # We will run an sqlite3 query here
   # Normally these type of queries are in another class, but this is still \
   data = repo.find_user_by_name(name)
+
+  # If we got nothing return a 404 not found
+  if data is None:
+    return "User not found", 404
 
 
   # We should also look for their medicines, but maybe that can be another page
@@ -67,4 +76,41 @@ def make_user(name):
 
   # The account could not be created so we need to return a 409 conflict
   return "Account Not Created. Username in use.", 409
+
+# Login the user and add them to a collection of sessions.
+# We should probably do a select check of our database, but the previous API call should do that already
+@api.route('/login', methods=['POST'])
+def login():
+  #Get the JSON data which is a username only.
+  #If this is not a single string for username this is a bad requests
+  name = request.get_json(silent=True)
+  if isinstance(name, str):
+
+    concurrent_sessions.append(name)
+    return "You are now signed in", 200
+
+
+
+  # They made a bad request since this isn't a string
+  return "Login requires a string", 400
+
+# Logout method that removes the input user string from the 
+# Works to remove names from the session
+@api.route('/logout', methods=["POST"])
+def logout():
+  #Get the JSON data which is a username only.
+  #If this is not a single string for username this is a bad requests
+  name = request.get_json()
+  if isinstance(name, str):
+
+    # Use some splices in a for loop
+    concurrent_sessions = [user for user in concurrent_sessions if user != name]
+    return "You are now signed out", 200
+
+
+
+  # They made a bad request since this isn't a string
+  return "Logout requires a string", 400
+
+  
 

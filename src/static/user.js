@@ -7,8 +7,40 @@ console.log("sdfa")
 //This is the controller for users. It has the scope variable and http requests
 app.controller("UserController", function($http, $scope, $q){
 
+  $scope.show = false
+  
   //This scope variable will contain the user's information
   $scope.user;
+
+  //On the loading of this page we should get the username that came with this session
+  $scope.loadUser = function(){
+    //Use our session stored info.
+    //We may also have to check that the session is stored by the API controller.
+    var uname = sessionStorage.getItem("username")
+
+    //If the uname does not exist we should redirect back to the login page
+    if(uname == null){
+      location.href = "/";
+    }
+
+    //Get the user data now
+    $http.get("/user/" + uname).then(function(response){
+      //Get info from our response
+      console.log(response);
+      console.log(response.data);
+      $scope.user = response.data;
+      console.log($scope.user);
+      $scope.show = true
+      //Flask 
+    })
+
+
+  }
+
+  //Load the user now
+  $scope.loadUser();
+
+  /*
   
   $scope.test = function(){
     console.log("Hello") 
@@ -49,5 +81,6 @@ app.controller("UserController", function($http, $scope, $q){
     )
   }
   $scope.test();
+  */
 });
 

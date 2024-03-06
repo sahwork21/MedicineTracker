@@ -18,6 +18,12 @@ def find_user_by_name(uname):
 
   cursor.execute("SELECT * FROM user WHERE username = ?", (uname,))
 
+  data = cursor.fetchone()
+
+  # If the data we are looking for is not found return None
+  if data == None:
+    return None
+
   # And return the tuples
-  data = cursor.fetchall()[0]
+  
   return data
