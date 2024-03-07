@@ -22,3 +22,10 @@ def user():
   return render_template("user.html")
 
 
+# Get the profile page
+@routes.route("/home/profile/")
+def profile():
+  return "You are " + request.args.get("uname")
+
+
+

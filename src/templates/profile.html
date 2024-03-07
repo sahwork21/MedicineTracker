@@ -1,0 +1,18 @@
+<!--This is just a basic profile of the user. It's really just to show off basic databinding-->
+<!DOCTYPE HTML>
+<html ng-app = "myApp">
+  <head>
+    <title>Profile Page</title>
+
+    {%block javascript%}
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular.min.js"></script>
+    <script src ="{{ url_for('static', filename='profile.js')}}"></script>
+    {%endblock%}
+  </head>
+  <body ng-controller="ProfileController">
+    <!--Just display a home button and the user profile info-->
+
+
+  </body>
+</html>
