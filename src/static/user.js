@@ -3,11 +3,12 @@
 //We also have to receive the jsonified data at the start
 //For a test just do a console log of the info 
 var app = angular.module('myApp', []);
-console.log("sdfa")
+
 //This is the controller for users. It has the scope variable and http requests
 app.controller("UserController", function($http, $scope, $q){
 
-  $scope.show = false
+  //Hide this page to start
+  $scope.showPage = false
   
   //This scope variable will contain the user's information
   $scope.user;
@@ -22,17 +23,22 @@ app.controller("UserController", function($http, $scope, $q){
     if(uname == null){
       location.href = "/";
     }
+    else{
 
     //Get the user data now
-    $http.get("/user/" + uname).then(function(response){
+      $http.get("/user/" + uname).then(function(response){
       //Get info from our response
       //console.log(response);
       //console.log(response.data);
-      $scope.user = response.data;
+        $scope.user = response.data;
       //console.log($scope.user);
-      $scope.show = true
+        $scope.show = true
       //Flask 
-    })
+      })
+
+      //Now show the page since we know the user is not cheating
+      $scope.showPage = true;
+    }
 
 
   }
@@ -42,7 +48,7 @@ app.controller("UserController", function($http, $scope, $q){
 
   //Create the other function for logging the user out
   //Remove this user's session info and redirect them to the home page
-  $scope.logout =function(){
+  $scope.logout = function(){
     //Remove sessionStorage info
     sessionStorage.removeItem("username");
 

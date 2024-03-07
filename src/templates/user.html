@@ -27,7 +27,7 @@
     <!--Buttons (These are really just links) to select profile or settings-->
     <!--Room to add new links-->
     <!--These buttons came from the CSS tailwind library. Source: https://flowbite.com/docs/components/buttons/-->
-    <div ng-cloak class="ng-cloak max-w-7xl mx-auto min-h-screen p-3 mt-10">
+    <div ng-if = "showPage" class="ng-cloak max-w-7xl mx-auto min-h-screen p-3 mt-10">
 
       <!--Logout and home buttons. The logout is an actual button that needs to wrap up the user-->
       <div class = "flex flex-wrap content-center gap-2 my-2 sm:flex-nowrap" >
@@ -41,7 +41,6 @@
         <!--This button will run a function and log us out. I will keep it on the home page only-->
         <div class="absolute top-4 right-16 h-16 w-16">
           <button ng-click="logout()" type="button" class=" text-black bg-white border fill-rose-500 border-rose-500 hover:bg-rose-500 hover:text-white focus:outline-none focus:ring-[#3b5998]/50 font-medium rounded-lg text-sm px-5 py-2.5 text-center inline-flex items-center">
-            
             Logout
           </button>
         </div>
