@@ -12,6 +12,7 @@
   </head>
   <body ng-controller="ProfileController">
     <!--Just display a home button and the user profile info-->
+    {%raw%}
     <div ng-if = "showPage" class="ng-cloak max-w-7xl mx-auto min-h-screen p-3 mt-10">
 
       <!--Home button-->
@@ -30,9 +31,10 @@
 
       </div>
 
-      <h2 class = "text-center font-semibold ">Profile For </h2>
+      <h2 class = "text-center font-semibold ">Profile For {{user.username}}</h2>
     </div>
 
+    {%endraw%}
 
   </body>
 </html>
