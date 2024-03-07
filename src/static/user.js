@@ -34,7 +34,7 @@ app.controller("UserController", function($http, $scope, $q){
       //console.log($scope.user);
         $scope.show = true
       //Flask 
-      })
+      });
 
       //Now show the page since we know the user is not cheating
       $scope.showPage = true;

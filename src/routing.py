@@ -25,7 +25,7 @@ def user():
 # Get the profile page
 @routes.route("/home/profile/")
 def profile():
-  return "You are " + request.args.get("uname")
+  return render_template("profile.html")
 
 
 

@@ -1,7 +1,7 @@
 //All this page does is get the information for a user's profile.
 //All we have to do is send a GET request and display an object
 
-var app = angular.module("myApp", []);
+var app = angular.module('myApp', []);
 
 app.controller("ProfileController", function($http, $scope, $q){
   //Create our scope variable for a user to point to 
@@ -22,27 +22,33 @@ app.controller("ProfileController", function($http, $scope, $q){
 
     //If the uname does not exist we should redirect back to the login page
     //Also bail out if the username path variable is different
-    var urlParams = new URLSearchParams(window.location.search);
-    var paramName = urlParams.get('uname');
-    if(uname == null || paramName != storedUname){
+    const urlParams = new URLSearchParams(window.location.search);
+    
+
+    const paramName = urlParams.get('uname');
+    if(paramName == null || storedUname == null || paramName != storedUname){
       location.href = "/";
     }
     else{
 
     //Get the user data now
-      $http.get("/user/" + paramName).then(function(response){
+      $http.get("/user/" + storedUname).then(function(response){
       //Get info from our response
       //console.log(response);
-      //console.log(response.data);
+        console.log(response.data);
+      
         $scope.user = response.data;
       //console.log($scope.user);
-        $scope.show = true
+      
       //Flask 
-      })
+      });
 
       //Now show the page since we know the user is not cheating
+
+      
       $scope.showPage = true;
     }
+    console.log($scope.user);
 
 
   }
