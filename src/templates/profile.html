@@ -32,6 +32,14 @@
       </div>
 
       <h2 class = "text-center font-semibold ">Profile For {{user.username}}</h2>
+      <div class=" flex-wrap content-center gap-2 my-2 sm:flex-nowrap"></div>
+        <ul class="list-none">
+          <li>Age: {{user.age}}</li>
+          <li>Gender: {{user.gender}}</li>
+          <li>Weight: {{user.weight}}</li>
+          <li>Healthcare Provider: {{user.hpc}}</li>
+        </ul>
+      </div>
     </div>
 
     {%endraw%}
