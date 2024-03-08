@@ -19,13 +19,18 @@ def index():
 # Get the user page
 @routes.route("/home/", methods = ["POST", "GET"])
 def user():
-  return render_template("user.html")
+  return render_template("home.html")
 
 
 # Get the profile page
 @routes.route("/home/profile/")
 def profile():
   return render_template("profile.html")
+
+# Get the medicines page
+@routes.route("/home/medicines/")
+def medicine():
+  return render_template("medicines.html")
 
 
 

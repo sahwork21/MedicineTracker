@@ -1,0 +1,50 @@
+<!--This is just a basic template of the medicines for a user. It's really just to show off basic databinding-->
+<!DOCTYPE HTML>
+<html ng-app="myApp">
+  <head>
+    <title>Medicine Page</title>
+
+    {%block javascript%}
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular.min.js"></script>
+    <script src ="{{ url_for('static', filename='medicines.js')}}"></script>
+    {%endblock%}
+  </head>
+  <body ng-controller="MedicineController">
+    <!--Just display a home button and the user medicine info-->
+    {%raw%}
+    <div ng-if = "showPage" class="ng-cloak max-w-7xl mx-auto min-h-screen p-3 mt-10">
+
+      <!--Home button-->
+      <div class = "flex flex-wrap content-center gap-2 my-2 sm:flex-nowrap" >
+        <!--The home button is just another link. It's probably not necessary on this page if we are being honest-->
+        
+
+        <!--This link will run a function and log us out. I will keep it on the home page only-->
+        <div class="absolute top-4 left-16 h-16 w-16">
+          <a href="/home" type="button" class=" text-black bg-white border outline outline-2 fill-gray-300 border-gray-500 hover:bg-gray-800 hover:text-white focus:outline-none focus:ring-[#3b5998]/50 font-medium rounded-lg text-sm px-5 py-2.5 text-center inline-flex items-center">
+            Home
+          </a>
+        </div>
+
+        
+
+      </div>
+
+      <h2 class = "text-center font-semibold ">Your Medicines and Prescriptions</h2>
+      <div class=" flex-wrap content-center gap-2 my-2 sm:flex-nowrap"></div>
+        <ul class="list-none">
+          <!--ng-repeat for all the medicines we returned-->
+          <!--The user may have no medicines so just show nothing if that is the case-->
+          <!--If REST API was data agnostic we might be able to have a specific picture for this-->
+          <li ng-repeat = "med in medicines">{{med.name}}</li>
+          <li ng-repeat = "med in medicines">{{med.amount}} mg</li>
+          <li ng-if = "medicines.length == 0">You have no medicines or prescriptions to take</li>
+        </ul>
+      </div>
+    </div>
+
+    {%endraw%}
+
+  </body>
+</html>
