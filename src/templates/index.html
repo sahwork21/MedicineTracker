@@ -1,0 +1,78 @@
+<!DOCTYPE HTML>
+<html ng-app = "myApp">
+
+<head>
+  <title>Login Page</title>
+  {%block javascript%}
+  <script src="https://cdn.tailwindcss.com"></script> <!--Styling classes for us to use-->
+  <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular.min.js"></script>
+  <script src ="{{ url_for('static', filename='index.js')}}"></script>
+  {%endblock%}
+  <!--Controller logic to handle username inputs-->
+
+  <!--Style modifier to hide our button-->
+  
+</head>
+
+<!--Contents of the index page-->
+<body ng-controller="IndexController" class = "bg-gray-100">
+  <!--Banner to introduce the user-->
+  <div class="flex flex-col justify-center items-center min-h-screen bg-white">
+		<div class="">
+			
+      <style>
+        svg {
+          fill: #dc1717; 
+        }
+      </style> <!--svg credit to Font Awesome Free 6.4.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) Copyright 2023 Fonticons, Inc. -->
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"> <g> <path fill="none" d="M0 0H24V24H0z"/> <path d="M19 2v2h-2v3c1.657 0 3 1.343 3 3v11c0 .552-.448 1-1 1H5c-.552 0-1-.448-1-1V10c0-1.657 1.343-3 3-3V4H5V2h14zm-2 7H7c-.552 0-1 .448-1 1v10h12V10c0-.552-.448-1-1-1zm-4 2v2h2v2h-2.001L13 17h-2l-.001-2H9v-2h2v-2h2zm2-7H9v3h6V4z"/> </g> </svg>
+			<h1 class="text-xl font-semibold text-stone-500 mt-3">Sign in to Medicine Manager</h1>
+		</div>
+  
+
+  <!--form for the entry of the username and some error messages. Use raw to skip flask modifications-->
+    {% raw %}
+    <form class="min-w-[25%]" name="loginForm" ng-model="loginForm" ng-submit="onSubmit()">
+      <!--Use a simple textbox for data entry. Show something if they entered an incorrect username-->
+        <div>
+          <p class="mt-10 font-semibold text-sm">Username</p>
+          <input id="username" name="username" ng-model="formData.username" class="w-full ring-1 rounded-md p-2 mt-1 font-light hover:ring-blue-500"
+          placeholder="Enter username" required>
+
+          
+
+         
+          
+          
+        </div>
+        <div>
+          <span ng-show="loginForm.username.$touched && loginForm.username.$invalid" class="mt-10 font-semibold text-sm">Please enter your username</span>
+        </div>
+        <div>
+          <button type="submit" class="w-full p-2 mt-6 text-white rounded-lg bg-blue-500 hover:bg-blue-700" 
+				ng-disabled="!formData.username">Sign in</button>
+
+          <!--Submission responses-->
+          <span ng-if="invalid" class="mt-10 font-semibold text-sm text-red-600">Invalid username</span>
+          <span ng-if="success" class="mt-10 font-semibold text-sm text-green-600">Logging in</span>
+        </div>
+
+        
+
+        
+      
+      
+      
+      
+      
+  </form>
+  {% endraw %}
+  
+  
+
+
+
+  </div>
+</body>
+
+</html>
