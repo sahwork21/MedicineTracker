@@ -40,11 +40,11 @@ print(data)
 # Commit changes and close our connection
 
 # Run a check of select
-data = cursor.execute("SELECT username FROM user WHERE username = ?", ("Alice",)).fetchall()
-print(data)
-print(len(data))
+#data = cursor.execute("SELECT username FROM user WHERE username = ?", ("Alice",)).fetchall()
+#print(data)
+#print(len(data))
 
-connection.commit()
+#connection.commit()
 cursor.close()
 
 connection.close()
