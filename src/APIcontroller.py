@@ -112,5 +112,33 @@ def logout():
   # They made a bad request since this isn't a string
   return "Logout requires a string", 400
 
+# This is the get request for the medicines of a user
+# The path variable should be the id of the patient since that is unique
+# We will use this id to find all the medicines in our meds table with that foreign key
+@api.route('/meds/<userid>')
+def get_medicines(userid):
+  # Do an SQL query for the meds table and use that userid we were given
+  # If the query finds nothing just return a 404 error and the controller will do the rest
+  data = repo.find_meds_by_patientid(userid)
+
+  # 404 not found since this was not found
+  if data is None:
+    return "No Meds", 404
+
+  # We have to jsonify the data into a dictionary for the frontend
+  # We could leave it in array, but I do not feel like changing from dictionary format
+  json_data = {'medicineID' : data[0],
+                    'name' : data[1],
+                    'amount' : data[2],
+                     }
   
+  return jsonify(json_data), 200
+
+  
+  
+
+  
+
+  
+
 
