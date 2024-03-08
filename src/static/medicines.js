@@ -41,6 +41,11 @@ app.controller("MedicineController", function($http, $scope, $q){
         console.log(response.data);
       
         $scope.user = response.data;
+
+        //We also have to get their medicine information
+        //This call needs to be made here since HTTP requests are asynchronous
+        //Good thing we have another function for this
+        $scope.loadMedicines();
       //console.log($scope.user);
       
       //Flask 
@@ -51,7 +56,10 @@ app.controller("MedicineController", function($http, $scope, $q){
       
       $scope.showPage = true;
     }
-    console.log($scope.user);
+    //console.log($scope.user);
+
+
+    
 
 
   }
@@ -60,11 +68,12 @@ app.controller("MedicineController", function($http, $scope, $q){
   //Load up the medicines for this userID
   $scope.loadMedicines = function(){
     // Use the userID from the scope variable to assist us
-    var id = $user.userID;
+    
+    console.log($scope.user.userID);
 
     //Now make a get request
     // A 200 means we have data a 404 means no medicines exist and we don't need to display anything
-    $http.get("/meds/" + id).then(function(success){
+    $http.get("/meds/" + $scope.user.userID).then(function(success){
       console.log(success.data);
       $scope.medicines = success.data;
     },
@@ -76,12 +85,18 @@ app.controller("MedicineController", function($http, $scope, $q){
     });
   }
 
-  //Load the user now
-  $scope.loadUser();
+  //Start function to act like main kind of
+  // Just load all the data so javascript does not skip over anything
+  $scope.loadAllData = function(){
+    //Load the user now
+    $scope.loadUser();
 
-  //We also have to get their medicine information
-  //Good thing we have a GET request for that 
-  $scope.loadMedicines();
+
+  }
+
+  $scope.loadAllData();
+
+  
 
 });
 

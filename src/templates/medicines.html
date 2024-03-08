@@ -37,8 +37,10 @@
           <!--ng-repeat for all the medicines we returned-->
           <!--The user may have no medicines so just show nothing if that is the case-->
           <!--If REST API was data agnostic we might be able to have a specific picture for this-->
-          <li ng-if = "medicines.length > 0" ng-repeat = "med in medicines">{{med.name}}</li>
-          <li ng-if = "medicines.length > 0" ng-repeat = "med in medicines">{{med.amount}} mg</li>
+          <li ng-if = "medicines.length > 0" ng-repeat = "med in medicines">
+            <p>{{med.name}}</p>
+            <p>{{med.amount}} mg.</p>
+          </li>
           <li ng-if = "medicines.length == 0">You have no medicines or prescriptions to take</li>
         </ul>
       </div>

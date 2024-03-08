@@ -127,10 +127,7 @@ def get_medicines(userid):
 
   # We have to jsonify the data into a dictionary for the frontend
   # We could leave it as an array of tuples, but that makes the frontend a bit harder to use
-  json_data = {'medicineID' : data[0],
-                    'name' : data[1],
-                    'amount' : data[2],
-                     }
+  
   json_list = []
   
   for m in data:
@@ -139,7 +136,7 @@ def get_medicines(userid):
                     'amount' : m[2],
                      })
   
-  return jsonify(json_data), 200
+  return jsonify(json_list), 200
 
   
   
