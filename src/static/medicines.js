@@ -14,6 +14,9 @@ app.controller("MedicineController", function($http, $scope, $q){
   //This scope variable will contain the user's information
   $scope.user;
 
+  // This scope variable will contain a list for our medicines
+  $scope.medicines;
+
   //On the loading of this page we should get the username that came with this session
   $scope.loadUser = function(){
     //Use our session stored info.
@@ -53,11 +56,32 @@ app.controller("MedicineController", function($http, $scope, $q){
 
   }
 
+
+  //Load up the medicines for this userID
+  $scope.loadMedicines = function(){
+    // Use the userID from the scope variable to assist us
+    var id = $user.userID;
+
+    //Now make a get request
+    // A 200 means we have data a 404 means no medicines exist and we don't need to display anything
+    $http.get("/meds/" + id).then(function(success){
+      console.log(success.data);
+      $scope.medicines = success.data;
+    },
+
+    //404 do nothing so just make an empty list then the ng-if tags will take care of the rest
+    function(failure){
+      console.log("No Meds found");
+      $scope.medicines = [];
+    });
+  }
+
   //Load the user now
   $scope.loadUser();
 
   //We also have to get their medicine information
   //Good thing we have a GET request for that 
+  $scope.loadMedicines();
 
 });
 

@@ -126,11 +126,18 @@ def get_medicines(userid):
     return "No Meds", 404
 
   # We have to jsonify the data into a dictionary for the frontend
-  # We could leave it in array, but I do not feel like changing from dictionary format
+  # We could leave it as an array of tuples, but that makes the frontend a bit harder to use
   json_data = {'medicineID' : data[0],
                     'name' : data[1],
                     'amount' : data[2],
                      }
+  json_list = []
+  
+  for m in data:
+    json_list.append({'medicineID' : m[0],
+                    'name' : m[1],
+                    'amount' : m[2],
+                     })
   
   return jsonify(json_data), 200
 
