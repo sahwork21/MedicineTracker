@@ -14,7 +14,7 @@ def find_user_by_name(uname):
   # Now execute the query
   cursor = db.cursor()
 
-  print(uname)
+  #print(uname)
 
   cursor.execute("SELECT * FROM user WHERE username = ?", (uname,))
 
@@ -27,3 +27,21 @@ def find_user_by_name(uname):
   # And return the tuples
   
   return data
+
+# Return a list of tuples of the medicines in the meds table with a matching patientID
+def find_meds_by_patientid(userid):
+  # sql query the meds table
+  db = sqlite3.connect("test.db")
+
+  if db is None:
+    return None
+
+  # Now execute the query
+  cursor = db.cursor()
+
+
+  result = cursor.execute("SELECT medicineID, name, amount FROM meds WHERE patientID = ?", (userid,)).fetchall()
+  if(len(result) == None):
+    return None
+  
+  return result
