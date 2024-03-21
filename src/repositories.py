@@ -45,3 +45,18 @@ def find_meds_by_patientid(userid):
     return None
   
   return result
+
+
+# Create a new medicine for a specific user
+# The new medicine needs a name, amount, and patient's id to work as a foreign key
+def create_meds(userid, name, amount):
+  db = sqlite3.connect("test.db")
+
+  if db is None:
+    return None
+  
+  # Now insert into the table a new medicine value with the params that were passed in
+  # It would probably be smart to convert that collection into an object with the medicines
+  cursor = db.cursor()
+
+  cursor.execute("INSERT INTO meds (patientID, name, amount) VALUES (?, ?, ?)", (userid, name, amount),)

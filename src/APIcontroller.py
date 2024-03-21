@@ -112,11 +112,30 @@ def logout():
   # They made a bad request since this isn't a string
   return "Logout requires a string", 400
 
-# This is the get request for the medicines of a user
+# GET is the get request for the medicines of a user
 # The path variable should be the id of the patient since that is unique
 # We will use this id to find all the medicines in our meds table with that foreign key
-@api.route('/meds/<userid>')
+
+#POST is the ways medicines will
+@api.route('/meds/<userid>',methods = ["GET", "POST"])
 def get_medicines(userid):
+
+  # Check if this is a POST request
+  if request.method == "POST":
+    # Get all the needed values from the JSON
+    name = request.value.get("name")
+    amount = request.values.get("amount")
+
+    # Insert the medicine and we will receive a response from the repos method
+    # We probably want to prevent duplicate medicine names, but I may do that later and create a PUT method here for editings
+    repo.create_meds(userid, name, amount)
+
+    # REturn a 200 request because it worked probably
+
+    return "Medicine Created", 200
+
+
+  # THis is a GET request for the meds
   # Do an SQL query for the meds table and use that userid we were given
   # If the query finds nothing just return a 404 error and the controller will do the rest
   data = repo.find_meds_by_patientid(userid)
@@ -137,6 +156,9 @@ def get_medicines(userid):
                      })
   
   return jsonify(json_list), 200
+
+
+
 
   
   
