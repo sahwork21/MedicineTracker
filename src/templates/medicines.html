@@ -48,7 +48,7 @@
           <div>
             <p class="mt-10 font-semibold text-sm">Medicine Name</p>
             <input id="name" name="name" ng-model="formData.name" class="w-full ring-1 rounded-md p-2 mt-1 font-light hover:ring-blue-500"
-            placeholder="Enter Medicine Name" required>    
+            placeholder="Enter Medicine Name">    
             
           </div>
           <div>
@@ -57,17 +57,22 @@
           <div>
             <p class="mt-10 font-semibold text-sm">Medicine Amount in Milligrams (mg)</p>
             <input id="amount" name="amount" ng-model="formData.amount" class="w-full ring-1 rounded-md p-2 mt-1 font-light hover:ring-blue-500"
-            placeholder="Enter Amount" required>
+            placeholder="Enter Amount" required = "0" min = "0">
           </div>
           <div>
-            <span ng-show="addMedsForm.amount.$touched && addMedsForm.amount.$invalid" class="mt-10 font-semibold text-sm">Please enter a nonzero amount</span>
+            <span ng-show="(addMedsForm.amount.$touched && addMedsForm.amount.$invalid) || addMedsForm.amount.$error.min" class="mt-10 font-semibold text-sm">Please enter a nonzero amount</span>
           </div>
   
   
           <div>
-            <!--Add the medicine with this form-->
-            <button type="submit" class="w-full p-2 mt-6 text-white rounded-lg bg-blue-500 hover:bg-blue-700" 
-          ng-disabled="(!formData.name || !formData.amount)">Add Medicine</button>
+            <!--Add the medicine with this form or close the popup-->
+            
+
+            <button type="close" ng-click="closeForm()" class="w-full p-2 mt-6 text-white rounded-lg bg-red-500 hover:bg-red-700" >
+              Cancel</button>
+
+            <button type="submit" class="w-full p-2 mt-6 text-white rounded-lg bg-green-500 hover:bg-green-700" 
+              ng-show="(formData.name && formData.amount && !isNaN(formData.amount) && formData.amount > 0 )">Add Medicine</button>
   
             
           </div>
