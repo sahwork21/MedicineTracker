@@ -20,18 +20,61 @@
         <!--The home button is just another link. It's probably not necessary on this page if we are being honest-->
         
 
-        <!--This link will run a function and log us out. I will keep it on the home page only-->
+        <!--This link will send you to the home page-->
         <div class="absolute top-4 left-16 h-16 w-16">
           <a href="/home" type="button" class=" text-black bg-white border outline outline-2 fill-gray-300 border-gray-500 hover:bg-gray-800 hover:text-white focus:outline-none focus:ring-[#3b5998]/50 font-medium rounded-lg text-sm px-5 py-2.5 text-center inline-flex items-center">
             Home
           </a>
         </div>
 
+        <!--Create medicine button. This should open a popup where a user is on another page, but they can make a medicine-->
+        <div class="absolute top-4 right-16 h-16 w-48">
+          <button ng-click="openForm()" type="button" class=" text-black bg-white border fill-teal-500 border-teal-500 hover:bg-teal-500 hover:text-white focus:outline-none focus:ring-[#3b5998]/50 font-medium rounded-lg text-sm px-5 py-2.5 text-center inline-flex items-center">
+            Add New Medicine
+          </button>
+        </div>
+
         
 
       </div>
-
+      
       <h2 class = "text-center font-semibold ">Your Medicines and Prescriptions</h2>
+
+      <!--This is the form for creating a new medicine. It will be hidden until the Add New Medicine button is clicked-->
+      <!--It is really just a pair of input boxes that will appear-->
+
+      <form class="absolute right-16 min-w-[25%] bg-white border-4 border-black" name="addMedsForm" ng-model="addMedsForm"  ng-submit="onSubmit()">
+        <!--Use a simple textbox for data entry. Show something if they entered an incorrect name or amount-->
+          <div>
+            <p class="mt-10 font-semibold text-sm">Medicine Name</p>
+            <input id="name" name="name" ng-model="formData.name" class="w-full ring-1 rounded-md p-2 mt-1 font-light hover:ring-blue-500"
+            placeholder="Enter Medicine Name" required>    
+            
+          </div>
+          <div>
+            <span ng-show="addMedsForm.name.$touched && addMedsForm.name.$invalid" class="mt-10 font-semibold text-sm">Please enter the medicine name</span>
+          </div>
+          <div>
+            <p class="mt-10 font-semibold text-sm">Medicine Amount in Milligrams (mg)</p>
+            <input id="amount" name="amount" ng-model="formData.amount" class="w-full ring-1 rounded-md p-2 mt-1 font-light hover:ring-blue-500"
+            placeholder="Enter Amount" required>
+          </div>
+          <div>
+            <span ng-show="addMedsForm.amount.$touched && addMedsForm.amount.$invalid" class="mt-10 font-semibold text-sm">Please enter a nonzero amount</span>
+          </div>
+  
+  
+          <div>
+            <!--Add the medicine with this form-->
+            <button type="submit" class="w-full p-2 mt-6 text-white rounded-lg bg-blue-500 hover:bg-blue-700" 
+          ng-disabled="(!formData.name || !formData.amount)">Add Medicine</button>
+  
+            
+          </div>
+        </form>
+      
+      
+
       <div class=" flex-wrap content-center gap-2 my-2 sm:flex-nowrap"></div>
         <ul class="list-none">
           <!--ng-repeat for all the medicines we returned-->
