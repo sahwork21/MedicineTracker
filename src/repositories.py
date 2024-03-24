@@ -59,4 +59,8 @@ def create_meds(userid, name, amount):
   # It would probably be smart to convert that collection into an object with the medicines
   cursor = db.cursor()
 
-  cursor.execute("INSERT INTO meds (patientID, name, amount) VALUES (?, ?, ?)", (userid, name, amount),)
+  cursor.execute("INSERT INTO meds (patientID, name, amount) VALUES (?, ?, ?)", (userid, name, amount))
+
+  # Now commit the changes we inserted with
+  db.commit()
+

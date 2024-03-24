@@ -122,9 +122,17 @@ def get_medicines(userid):
 
   # Check if this is a POST request
   if request.method == "POST":
+
+    data = request.get_json(silent=True)
+
+
     # Get all the needed values from the JSON
-    name = request.value.get("name")
-    amount = request.values.get("amount")
+    name = data.get("name")
+    amount = int(data.get("amount"))
+
+    ret = [userid, name, amount]
+
+    
 
     # Insert the medicine and we will receive a response from the repos method
     # We probably want to prevent duplicate medicine names, but I may do that later and create a PUT method here for editings
@@ -132,7 +140,7 @@ def get_medicines(userid):
 
     # REturn a 200 request because it worked probably
 
-    return "Medicine Created", 200
+    return ret, 200
 
 
   # THis is a GET request for the meds

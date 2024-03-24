@@ -139,9 +139,15 @@ app.controller("MedicineController", function($http, $scope, $q){
       console.error("Error in medicine form");
     }
     else{
+      //Convert the amount into an Integer on the server end
+      //Don't want to stress the client system too hard
+    
+      console.log($scope.formData);
+      
       // POST request with the formData body and clean everything up now
       $http.post("/meds/" + $scope.user.userID, $scope.formData).then(function(success){
         console.log("Inputting Meds");
+        console.log(success);
         //Close the form and reget the meds
         $scope.closeForm();
 
