@@ -86,10 +86,19 @@
           <!--ng-repeat for all the medicines we returned-->
           <!--The user may have no medicines so just show nothing if that is the case-->
           <!--If REST API was data agnostic we might be able to have a specific picture for this-->
-          <li ng-if = "medicines.length > 0" ng-repeat = "med in medicines">
-            <p>{{med.name}}</p>
-            <p>{{med.amount}} mg.</p>
-          </li>
+          <!--There is also a button to delete a medicine that will follow this medicine item-->
+          
+          <div class="row" ng-repeat="med in medicines">
+            <div class="form-group col-md-12" id="{{med.medicineID}}">
+              <p class = "col-md-2">{{med.name}}</p>
+              <p class = "col-md-2">{{med.amount}} mg.</p>
+              <button  ng-click="deleteMedicine(med.medicineID)" type="button" class="col-md-4 text-black bg-white border fill-red-500 border-red-500 hover:bg-red-500 hover:text-white focus:outline-none focus:ring-[#3b5998]/50 font-medium rounded-lg text-sm px-5 py-2.5 text-center inline-flex items-center">
+                Delete {{med.name}}
+              </button>
+            </div>
+            
+            
+          </div>
           <li ng-if = "medicines.length == 0">You have no medicines or prescriptions to take</li>
         </ul>
       </div>

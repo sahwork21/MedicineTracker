@@ -118,7 +118,7 @@ def logout():
 
 #POST is the ways medicines will
 @api.route('/meds/<userid>',methods = ["GET", "POST"])
-def get_medicines(userid):
+def medicines_api_calls(userid):
 
   # Check if this is a POST request
   if request.method == "POST":
@@ -130,7 +130,15 @@ def get_medicines(userid):
     name = data.get("name")
     amount = int(data.get("amount"))
 
-    ret = [userid, name, amount]
+    #ret = [userid, name, amount]
+
+    # validate the name or amount
+    if name is None or amount is None:
+      return "Invalid Amount or Name", 400
+    
+    # validate the amount is greater than 0
+    if amount <= 0:
+      return "Amount must be greater than 0", 400
 
     
 
@@ -140,7 +148,7 @@ def get_medicines(userid):
 
     # REturn a 200 request because it worked probably
 
-    return ret, 200
+    return "Medicine Added", 200
 
 
   # THis is a GET request for the meds
@@ -164,6 +172,38 @@ def get_medicines(userid):
                      })
   
   return jsonify(json_list), 200
+
+
+# Extension to the meds/<userid> endpoint delete or edit a specific medicine. 
+# Delete a medicine by using a medicine id
+# We need this to be here since DELETE does not allow us to have a request body
+# Add an extension to our existing endpoint since DELETE does not allow request bodies
+# PUT for put we should be editing a medicine
+@api.route('/meds/<userid>/<medid>', methods = ["DELETE", "PUT"])
+def alter_medicines(userid, medid):
+  if request.method == "DELETE":
+
+    # Go to the repo and make a deletion
+    # It's a simple procedure that only needs the medid
+
+    rows = repo.delete_meds_by_id(medid)
+
+    # Check how many rows were altered
+    #Only one row affected return a 200
+    if rows == 1:
+
+      return "Medicine Deleted", 200
+    elif rows == 0:
+      return "Medicine Not Found", 404
+    
+    
+    return "Server is messed up", 500
+    
+
+
+
+
+
 
 
 

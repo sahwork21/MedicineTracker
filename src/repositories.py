@@ -64,3 +64,29 @@ def create_meds(userid, name, amount):
   # Now commit the changes we inserted with
   db.commit()
 
+
+#Delete a medicine from the table
+def delete_meds_by_id(medid):
+  db = sqlite3.connect("test.db")
+
+  if db is None:
+    return None
+  
+ 
+  cursor = db.cursor()
+
+  # If we try to delete the medicine and it is not there return a false and 404 error
+  
+
+
+  #SQL deletion with a DELETE FROM command. The medicine ids are unique and reliable
+  cursor.execute("DELETE FROM meds WHERE medicineID = ?", (medid,))
+
+  # Now commit the changes we deleted
+  db.commit()
+
+  # Return the number of rows affected. If it is 1 then we did it right
+  # IF it is more than 1 the table is screwed up
+  # If it is 0 then 404 error
+  return cursor.rowcount
+
