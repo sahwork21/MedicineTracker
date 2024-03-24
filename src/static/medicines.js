@@ -126,6 +126,8 @@ app.controller("MedicineController", function($http, $scope, $q){
     
   }
 
+
+
   // This is the submission form for the medicine. It will send a POST request to the /meds/<userid>
   // POST body will contain the name and amount for the medicine.
   // It should also wipe the text boxes on the form, close the form, and GET the medicine info a second time
@@ -167,6 +169,29 @@ app.controller("MedicineController", function($http, $scope, $q){
 
   }
 
+
+
+  //Delete a medicine row from our table
+  //We will receive a button input with an id to delete. We will then have to reload the medicines table
+  $scope.deleteMedicine = function(medID){
+    //Make a DELETE request with the medID
+    
+    //We could add some extra verification here but SQL is probably quicker
+    //Append the userID and medID onto the resource path
+    $http.delete("/meds/" + $scope.user.userID + "/" + medID).then(function(success){
+      console.log("Medicine deleted");
+      
+      //Reget the medicines
+      $scope.loadMedicines();
+    }
+    ,function(failure){
+      //The item was not found or the server messed up
+      //This should probably not happen 
+      console.error(failure);
+    });
+
+
+  }
 
   $scope.loadAllData();
 
