@@ -108,19 +108,56 @@ app.controller("MedicineController", function($http, $scope, $q){
   //This is the function for managing the popup form to create a new medicine
   // All it does is make the form show up on the page by turning the boolean for the form to true
   $scope.openForm = function(){
-
+    $scope.showForm = true;
   }
 
   // This is like the openForm function but we are going to shut the form down
   // Turn the boolean to false so the form disappears
   $scope.closeForm = function(){
+    $scope.showForm = false;
 
+
+    //Clean up the entry data
+    $scope.formData = {
+      name : "",
+      amount : ""
+    };
+
+    
   }
 
   // This is the submission form for the medicine. It will send a POST request to the /meds/<userid>
   // POST body will contain the name and amount for the medicine.
   // It should also wipe the text boxes on the form, close the form, and GET the medicine info a second time
   $scope.onSubmit = function(){
+
+    //Make a POST request if the medicine name and amount are correct
+
+    //Certify the amount is a number and is more than 0
+    if(isNaN($scope.formData.amount) || $scope.formData.amount <= 0){
+      //We should probably set some error scope vars here
+      console.error("Error in medicine form");
+    }
+    else{
+      // POST request with the formData body and clean everything up now
+      $http.post("/meds/" + $scope.user.userID, $scope.formData).then(function(success){
+        console.log("Inputting Meds");
+        //Close the form and reget the meds
+        $scope.closeForm();
+
+        $scope.loadMedicines();
+
+      },
+      function(failure){
+        //We messed up and the server did not like the input
+        console.log("Cannot input meds");
+      
+      });
+
+      
+
+    }
+
 
   }
 
